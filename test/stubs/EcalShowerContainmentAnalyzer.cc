@@ -3,8 +3,8 @@
  * 
  * Analyzer to test Shower Containment Corrections
  *   
- * $Date: 2006/10/26 23:35:38 $
- * $Revision: 1.6 $
+ * $Date: 2007/05/15 20:46:29 $
+ * $Revision: 1.1 $
  * \author S. Argiro'
  *
 */
@@ -18,9 +18,9 @@
 #include "CondFormats/DataRecord/interface/EcalADCToGeVConstantRcd.h"
 #include "CondFormats/EcalCorrections/interface/EcalShowerContainmentCorrections.h"
 #include "CondFormats/DataRecord/interface/EcalShowerContainmentCorrectionsRcd.h"
-
+#include "FWCore/ParameterSet/interface/FileInPath.h"
 #include "FWCore/Framework/interface/ESHandle.h"
-#include <FWCore/Framework/interface/EventSetup.h>
+#include "FWCore/Framework/interface/EventSetup.h"
 
 #include "DataFormats/EcalRecHit/interface/EcalRecHitCollections.h"
 #include "DataFormats/EcalDetId/interface/EBDetId.h"
@@ -212,7 +212,7 @@ void EcalShowerContainmentAnalyzer::analyze( edm::Event const & iEvent,
   
   std::pair<double,double> correction = contCorrection(iEvent,iSetup,maxid);
   ntuple_.corrected3x3=ntuple_.energy3x3/correction.first;
-  ntuple_.corrected5x5=energy5x5(iEvent,maxid)/correction.second;
+  ntuple_.corrected5x5=ntuple_.energy5x5/correction.second;
 
   
   tree_->Fill();
@@ -374,8 +374,8 @@ EcalShowerContainmentAnalyzer::contCorrection(const edm::Event& iEvent,
   const CaloSubdetectorGeometry *geometry_p= 
     geometry.getSubdetectorGeometry(DetId::Ecal, EcalBarrel);
   
-  std::string mapfile="BarrelSM1CrystalCenterElectron120GeV.dat";
-  TBPositionCalc pos(posparam, mapfile,geometry_p);
+  edm::FileInPath mapfile("Geometry/EcalTestBeam/data/BarrelSM1CrystalCenterElectron120GeV.dat");
+  TBPositionCalc pos(posparam, mapfile.fullPath(),geometry_p);
 
   vector<EBDetId> myDets = Xtals3x3(iEvent,centerXtal);
   
