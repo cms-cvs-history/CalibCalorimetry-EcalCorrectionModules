@@ -3,15 +3,14 @@
  * 
  * Analyzer to test Shower Containment Corrections
  *   
- * $Date: 2007/05/16 08:38:33 $
- * $Revision: 1.2 $
+ * $Date: 2007/07/16 14:08:43 $
+ * $Revision: 1.4 $
  * \author S. Argiro'
  *
 */
 
 #include <FWCore/Framework/interface/EDAnalyzer.h>
 #include <FWCore/Framework/interface/Event.h>
-#include "FWCore/Framework/interface/Handle.h"
 #include <FWCore/Framework/interface/MakerMacros.h>
 
 #include "CondFormats/EcalObjects/interface/EcalADCToGeVConstant.h"
