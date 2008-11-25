@@ -1,7 +1,6 @@
 <library file=stubs/EcalContainmentCorrectionAnalyzer.cc name=EcalContainmentCorrectionAnalyzer>
    <use name=FWCore/Framework>	
    <flags EDM_PLUGIN=1>
-   <use name=Foundation/PluginManager>	
    <use name=FWCore/ParameterSet>		
    <use name=DataFormats/DetId>		
    <use name=DataFormats/EcalDetId>
